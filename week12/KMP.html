@@ -1,0 +1,53 @@
+<script>
+    /**
+     * 1.暴力破解 O(m*n)
+     */
+    function find1(source, pattern) {
+        for (let i = 0; i < source.length; i++) {
+            let matched = true;
+            for (let j = 0; j < pattern.length; j++) {
+                if (source[i + j] !== pattern[j]) {
+                    matched = false;
+                    break;
+                }
+            }
+            if (matched) return true;
+        }
+        return false;
+    }
+
+    /**
+     * 2. O(m+n)
+     * 重复字符串不能匹配 例如：abcxxyz xy | abcabcabx abcabx
+     */
+    function find2(source, pattern) {
+
+        let table = new Array(pattern.length).fill(0);
+        let k = 0;
+
+        for (let j = 1; j < pattern.length; j++) {
+            pattern[j] === pattern[k] ? k++ : k = 0;
+            table[j] = k;
+        }
+
+        let j = 0;
+        for (let i = 0; i < source.length; i++) {
+            console.log(source[i], pattern[j]);
+            if (source[i] === pattern[j]) j++;
+            else {
+                /*
+                j = 0;
+                if (source[i] === pattern[j]) j++;
+                */
+                while (j > 0 && source[i] !== pattern[j]) {
+                    j = table[j - 1];
+                }
+                if (source[i] === pattern[j]) j++;
+                else j = 0;
+            }
+
+            if (j === pattern.length) return true;
+        }
+        return false;
+    }
+</script>
