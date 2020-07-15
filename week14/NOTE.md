@@ -4,8 +4,6 @@
 
 #### 对象与组件
 
-- 对象
-    - Properties
-    - Methods
-    - inherts
-- 组件
+- webpack
+
+- 轮播图 Carousel
