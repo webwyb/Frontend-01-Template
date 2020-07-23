@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <div id="my" style="transform: translate(0px, 0px);width: 100px;height: 100px;background: lightblue;"></div>
+    </body>
+    <script src="./gesture.js"></script>
+    <script>
+        document.addEventListener("contextmenu", e=>{e.preventDefault()})
+        let element = document.body;
+        
+        let x=0,y=0
+        
+        let my = document.getElementById("my")
+        enableGesture(my)
+
+        my.addEventListener('pan', e=>{
+            const {clientX, clientY, startX, startY} = e;
+            // console.log(x + clientX - startX);
+            // console.log(y + clientY - startY);
+            console.log(`translate(${x + clientX - startX}px, ${y + clientY - startY}px})`);
+            my.style.transform = `translate(${x + clientX - startX}px, ${y + clientY - startY}px)`
+        })
+        my.addEventListener('panend', e=>{
+            x = (x + e.clientX - e.startX);
+            y = (y + e.clientY - e.startY);
+        })
+        // my.addEventListener('tap', e=>{
+        //     console.log("e",e);
+        //     console.log('tap!!!!');
+        // })
+    </script>
+</html>
