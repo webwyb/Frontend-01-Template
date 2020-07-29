@@ -1,8 +1,8 @@
 
+// React 的create函数，在webpack plugin-transform-react-jsx 配置pragma
 function create(Cls, attributes, ...children){
-    
     let o;
-
+    // 处理原生标签和组件的区别：如Div 和 div
     if(typeof Cls === "string") {
         o = new Wrapper(Cls);
     } else {
@@ -11,8 +11,6 @@ function create(Cls, attributes, ...children){
         });
     }
 
-
-
     for(let name in attributes) {
         o.setAttribute(name, attributes[name]);
     }
@@ -20,7 +18,7 @@ function create(Cls, attributes, ...children){
     //console.log(children);
     console.log(o);
     for(let child of children) {
-        if(typeof child === "string")
+        if(typeof child === "string") // 处理文字
             child = new Text(child);
 
         o.appendChild(child);
@@ -28,7 +26,7 @@ function create(Cls, attributes, ...children){
 
     return o;
 }
-
+// 处理文字类
 class Text {
     constructor(text){
         this.children = [];
@@ -38,7 +36,7 @@ class Text {
         parent.appendChild(this.root);
     }
 }
-
+// 处理块级类
 class Wrapper{
     constructor(type){
         this.children = [];
@@ -89,7 +87,7 @@ class MyComponent {
     mountTo(parent){
         this.slot = <div></div>
         for(let child of this.children){
-            debugger;
+            // debugger;
             this.slot.appendChild(child)
         }
         this.render().mountTo(parent)
@@ -108,7 +106,7 @@ class MyComponent {
     </div>*/
 
 let component = <MyComponent>
-    <div>text text text</div>
+    <div>text text tqwext</div>
 </MyComponent>
     
 

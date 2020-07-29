@@ -6,26 +6,24 @@ let contexts = Object.create(null);
 let MOUSE_SYMBOL = Symbol("mouse")
 
 if(window.ontouchstart !==null){
+    // PC
+    element.addEventListener('mousedown',(event)=>{
+        contexts[MOUSE_SYMBOL] = Object.create(null);
+        start(event, contexts[MOUSE_SYMBOL])
 
+        let mousemove = event =>{
+            move(event, contexts[MOUSE_SYMBOL]);
+            // console.log(event.clientX, event.clientY);
+        }
+        let mouseend = event =>{
+            end(event, contexts[MOUSE_SYMBOL])
+            document.removeEventListener('mousemove', move)
+            document.removeEventListener('mouseup', end)
+        }
+        document.addEventListener('mousemove', mousemove)
+        document.addEventListener('mouseup', mouseend)
+    })
 
-// PC
-element.addEventListener('mousedown',(event)=>{
-    contexts[MOUSE_SYMBOL] = Object.create(null);
-    start(event, contexts[MOUSE_SYMBOL])
-
-    let mousemove = event =>{
-        move(event, contexts[MOUSE_SYMBOL]);
-        // console.log(event.clientX, event.clientY);
-    }
-    let mouseend = event =>{
-        end(event, contexts[MOUSE_SYMBOL])
-        document.removeEventListener('mousemove', move)
-        document.removeEventListener('mouseup', end)
-    }
-    document.addEventListener('mousemove', mousemove)
-    document.addEventListener('mouseup', mouseend)
-})
-    
 }
 // mobile
 element.addEventListener("touchstart", event=>{
