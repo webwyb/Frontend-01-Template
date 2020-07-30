@@ -1,4 +1,3 @@
-import {create, Wrapper, Text} from './creatElement.js'
 import { Carousel } from './Carousel.vue'
 
 let component = <Carousel

@@ -1,7 +1,7 @@
 <template>
-  <div style="width:500px;height:300px">
-    <img style="width:500px;height:300px" src="https://static001.geekbang.org/resource/image/bb/21/bb38fb7c1073eaee1755f81131f11d21.jpg"/>
-  </div>
+  <div>
+    <img />
+    </div>
 </template>
 <script>
 export default {

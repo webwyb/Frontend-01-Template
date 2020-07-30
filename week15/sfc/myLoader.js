@@ -1,4 +1,4 @@
-var parser = require('./parser(2)')
+var parser = require('./parser.js')
 
 module.exports = function(source, map) {
   console.log(source)
@@ -24,6 +24,7 @@ module.exports = function(source, map) {
     }
     let attrs = {};
     for(let attr of node.attributes) {
+      attrs[attr.name] = attr.value;
       if(!['type', 'tagName', 'isSelfClosing'].includes(attr.name)) {
         attrs[attr.name] = attr.value;
       }
@@ -33,7 +34,7 @@ module.exports = function(source, map) {
   }
   const r = `
 import {create, Wrapper, Text} from './creatElement.js'
-export class ${className} {
+export class Carousel {
   constructor(){
     this.children = [];
     this.root = document.createElement('div')
